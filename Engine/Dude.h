@@ -24,7 +24,6 @@ public:
 private:
 
 	int time;
-
 	float x;
 	float y;
 	float x_trans;

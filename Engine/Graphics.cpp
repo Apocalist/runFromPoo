@@ -316,9 +316,20 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 }
 
-void Graphics::DrawCircle(int center, int radius, int r, int g, int b)
+void Graphics::DrawCircle(int Cx, int Cy, int radius, int r, int g, int b)
 {
 
+	for (int x = Cx - radius; x < Cx + radius; x++) {
+		for (int y = Cy - radius; y < Cy + radius; y++) {
+
+			const int x_dist = Cx - x;
+			const int y_dist = Cy - y;
+			const int sqr = x_dist*x_dist + y_dist*y_dist;
+			if (sqr <= radius*radius && sqr >= radius*radius/2 ) {
+				PutPixel(x, y, r, g, b);
+			}
+		}
+	}
 }
 
 void Graphics::Numbers(int i,int in_x, int in_y ,int r, int g, int b)

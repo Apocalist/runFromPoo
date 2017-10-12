@@ -121,7 +121,8 @@ void Game::ComposeFrame()
 
 		gfx.Counter(score,400,10,225,225,225);
 
-		//
+		//Draw circle lesson:
+		//gfx.DrawCircle(400, 300, 200,225,112,2);
 
 		if (collided) {
 			DrawGameOver(358, 268);
