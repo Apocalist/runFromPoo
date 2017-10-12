@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	dude0(400,300),
+	dude0(400.0f,300.0f),
 	rng(rd()),
 	xDist(10, 770),
 	yDist(10, 570),
