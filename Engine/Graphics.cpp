@@ -316,6 +316,11 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 }
 
+void Graphics::DrawCircle(int center, int radius, int r, int g, int b)
+{
+
+}
+
 void Graphics::Numbers(int i,int in_x, int in_y ,int r, int g, int b)
 {
 
