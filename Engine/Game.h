@@ -64,8 +64,8 @@ private:
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> xDist;
 	std::uniform_int_distribution<int> yDist;
-	std::uniform_int_distribution<int> xDir;
-	std::uniform_int_distribution<int> yDir;
+	std::uniform_real_distribution<float> xDir;
+	std::uniform_real_distribution<float> yDir;
 
 	int r = 6;
 	int g = 72;

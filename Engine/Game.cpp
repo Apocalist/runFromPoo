@@ -30,8 +30,8 @@ Game::Game(MainWindow& wnd)
 	rng(rd()),
 	xDist(10, 770),
 	yDist(10, 570),
-	xDir(-1, 1),
-	yDir(-1, 1) 
+	xDir(-2.0f, 2.0f),
+	yDir(-2.0f, 2.0f) 
 {
 
 	box0.RandPos(xDist(rng),yDist(rng));
@@ -4354,12 +4354,14 @@ void Game::IncPoo( const Dude& dude)
 
 	}
 
+	// Dont spawn on top off Dude
+	// Current code has a flaw as seen in the last "else": if random pos is equal to hard coded value, poo IS going to spawn on top of dude non the less
 
 	if (!(nPooTemp == nPoo)) {
 		for (int i = nPooTemp; i < nPoo; i++) {
 
-			int xTemp = xDist(rng);
-			int yTemp = yDist(rng);
+			float xTemp = float(xDist(rng));
+			float yTemp = float(yDist(rng));
 
 			if (!(xTemp + poos[i].GetWidth() >= dude.GetX() &&
 				xTemp <= dude.GetX() + dude.GetWidth() &&
@@ -4371,10 +4373,11 @@ void Game::IncPoo( const Dude& dude)
 			}
 			else {
 				
-				poos[i].RandPos(10, 10, 1, 1);
+				poos[i].RandPos(10.0f, 10.0f, 1.0f, 1.0f);
 			}
 		}
 	}
+	//****
 
 
 }

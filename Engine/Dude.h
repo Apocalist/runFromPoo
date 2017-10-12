@@ -29,8 +29,8 @@ private:
 	float y;
 	float x_trans;
 	float y_trans;
-	float speedRate = 0.1;
-	float speed = 3;
+	float speedRate = 0.1f;
+	float speed = 3.0f;
 	static constexpr int width = 20;
 	static constexpr int height = 20;
 

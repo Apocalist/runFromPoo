@@ -7,22 +7,22 @@ class Poo
 {
 public:
 
-	void RandPos(int in_x, int in_y, int  in_x_dir, int in_y_dir);
+	void RandPos(float(in_x), float(in_y), float  in_x_dir, float in_y_dir);
 	void Update();
 	void Draw(Graphics& gfx);
 	void isColliding(const Dude& dude);
 	bool IsEaten() const;
-	int GetWidth() const;
-	int GetHeight() const;
+	float GetWidth() const;
+	float GetHeight() const;
 	void Reset();
 
 private:
 
-	int x;
-	int y;
-	int x_dir;
-	int y_dir;
+	float x;
+	float y;
+	float x_dir;
+	float y_dir;
 	bool isEaten = false;
-	static constexpr int width = 25;
-	static constexpr int height = 25;
+	static constexpr float width = 25;
+	static constexpr float height = 25;
 };
