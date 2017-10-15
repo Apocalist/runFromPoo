@@ -1,6 +1,7 @@
 #pragma once
 #include "Keyboard.h"
 #include "Graphics.h"
+#include "Timer.h"
 
 class Dude {
 
@@ -13,7 +14,7 @@ public:
 
 	}
 
-	void MoveDude(const Keyboard& kbd);
+	void MoveDude(const Keyboard& kbd, class Timer time);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 	float GetX() const;
@@ -23,7 +24,6 @@ public:
 
 private:
 
-	int time;
 	float x;
 	float y;
 	float x_trans;

@@ -4,11 +4,10 @@
 #include "Dude.h"
 
 
+void Poo::Update(class Timer time) {
 
-void Poo::Update() {
-
-	x += x_dir;
-	y += y_dir;
+	x += x_dir * time.DeltaTime();
+	y += y_dir * time.DeltaTime();
 
 	// Bounce off the screen limits
 
@@ -25,7 +24,7 @@ void Poo::Update() {
 	//****
 }
 
-void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir)
+void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir, class Timer time)
 {
 	
 	x = in_x;

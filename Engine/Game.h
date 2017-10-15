@@ -81,6 +81,8 @@ private:
 
 	Poo poos[200];
 
+	Timer time;
+
 	bool isStarted = false;
 
 	Box box0;

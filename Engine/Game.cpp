@@ -41,7 +41,8 @@ Game::Game(MainWindow& wnd)
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
+	time.Run();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -57,7 +58,7 @@ void Game::UpdateModel()
 			for (int i = 0; i < nPoo; i++) {
 
 				poos[i].isColliding(dude0);
-				poos[i].Update();
+				poos[i].Update(time);
 
 				if (poos[i].IsEaten()) {
 					collided = true;
@@ -65,7 +66,7 @@ void Game::UpdateModel()
 				}
 			}
 
-			dude0.MoveDude(wnd.kbd);
+			dude0.MoveDude(wnd.kbd,time);
 			dude0.ClampToScreen();
 
 			IncPoo(dude0);
@@ -4369,12 +4370,12 @@ void Game::IncPoo( const Dude& dude)
 				yTemp + poos[i].GetHeight() >= dude.GetY() &&
 				yTemp <= dude.GetY() + dude.GetHeight())) {
 
-				poos[i].RandPos(xTemp, yTemp, xDir(rng), yDir(rng));
+				poos[i].RandPos(xTemp, yTemp, xDir(rng), yDir(rng), time);
 
 			}
 			else {
 				
-				poos[i].RandPos(10.0f, 10.0f, 1.0f, 1.0f);
+				poos[i].RandPos(10.0f, 10.0f, 1.0f, 1.0f,time);
 			}
 		}
 	}

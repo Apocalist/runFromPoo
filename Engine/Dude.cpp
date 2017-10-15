@@ -4,7 +4,7 @@
 #include "Keyboard.h"
 
 
-void Dude::MoveDude(const Keyboard& kbd) {
+void Dude::MoveDude(const Keyboard& kbd, class Timer time) {
 
 	//Move dude
 	
@@ -88,8 +88,8 @@ void Dude::MoveDude(const Keyboard& kbd) {
 	}
 	//Add speed to vectors and map values to x and y
 
-	x += x_temp*speed;
-	y += y_temp*speed;
+	x += x_temp * speed * time.DeltaTime();
+	y += y_temp * speed * time.DeltaTime();
 
 }
 
