@@ -109,7 +109,7 @@ void Game::ComposeFrame()
 
 		// Game has started
 
-		DrawBox(box0.getX(), box0.getY(), box0.getWidth(), box0.getHeight());
+		box0.Draw(gfx);
 
 		for (int i = 0; i < nPoo; i++)
 		{
@@ -130,6 +130,64 @@ void Game::ComposeFrame()
 		}
 	}
 	
+}
+
+void Game::IncPoo( const Dude& dude)
+{
+
+	int nPooTemp = nPoo;
+
+	if (box0.BoxCollide(dude0)) {
+
+		nPoo++;
+
+	}
+
+	// Dont spawn on top off Dude
+	// Current code has a flaw as seen in the last "else": if random pos is equal to hard coded value, poo IS going to spawn on top of dude non the less
+
+	if (!(nPooTemp == nPoo)) {
+		for (int i = nPooTemp; i < nPoo; i++) {
+
+			float xTemp = float(xDist(rng));
+			float yTemp = float(yDist(rng));
+
+			if (!(xTemp + poos[i].GetWidth() >= dude.GetX() &&
+				xTemp <= dude.GetX() + dude.GetWidth() &&
+				yTemp + poos[i].GetHeight() >= dude.GetY() &&
+				yTemp <= dude.GetY() + dude.GetHeight())) {
+
+				poos[i].RandPos(xTemp, yTemp, xDir(rng), yDir(rng), time);
+
+			}
+			else {
+				
+				poos[i].RandPos(10.0f, 10.0f, 1.0f, 1.0f,time);
+			}
+		}
+	}
+	//****
+
+
+}
+
+void Game::Restart()
+{
+	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+
+		for (int i = 0; i < nPoo; i++) {
+			poos[i].Reset();
+		}
+
+		nPoo = 0;
+
+		score = 0;
+
+		collided = false;
+
+	}
+
+
 }
 
 void Game::DrawGameOver(int x, int y)
@@ -4319,86 +4377,3 @@ void Game::DrawTitleScreen(int x, int y)
 
 }
 
-void Game::DrawBox(int x0, int y0, int width, int height)
-{
-
-	CycleColor(r);
-	CycleColor(g);
-	CycleColor(b);
-
-
-
-	for (int x = 0; x < width; x++) {
-		for (int y = 0; y < height; y++)
-
-			gfx.PutPixel(x + x0, y + y0, r,g,b);
-	}
-}
-
-int Game::CycleColor(int& c)
-{
-
-	if (c >= 220 || c <= 5) {
-		colorRate = colorRate * -1;
-	}
-
-	return c += colorRate;
-}
-
-void Game::IncPoo( const Dude& dude)
-{
-
-	int nPooTemp = nPoo;
-
-	if (box0.BoxCollide(dude0)) {
-
-		nPoo++;
-
-	}
-
-	// Dont spawn on top off Dude
-	// Current code has a flaw as seen in the last "else": if random pos is equal to hard coded value, poo IS going to spawn on top of dude non the less
-
-	if (!(nPooTemp == nPoo)) {
-		for (int i = nPooTemp; i < nPoo; i++) {
-
-			float xTemp = float(xDist(rng));
-			float yTemp = float(yDist(rng));
-
-			if (!(xTemp + poos[i].GetWidth() >= dude.GetX() &&
-				xTemp <= dude.GetX() + dude.GetWidth() &&
-				yTemp + poos[i].GetHeight() >= dude.GetY() &&
-				yTemp <= dude.GetY() + dude.GetHeight())) {
-
-				poos[i].RandPos(xTemp, yTemp, xDir(rng), yDir(rng), time);
-
-			}
-			else {
-				
-				poos[i].RandPos(10.0f, 10.0f, 1.0f, 1.0f,time);
-			}
-		}
-	}
-	//****
-
-
-}
-
-void Game::Restart()
-{
-	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
-
-		for (int i = 0; i < nPoo; i++) {
-			poos[i].Reset();
-		}
-
-		nPoo = 0;
-
-		score = 0;
-
-		collided = false;
-
-	}
-
-
-}

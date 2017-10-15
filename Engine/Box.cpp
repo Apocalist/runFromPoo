@@ -25,6 +25,16 @@ void Box::RandPos(int in_x, int in_y)
 	y = in_y;
 }
 
+void Box::Draw(Graphics& gfx)
+{
+	for (int iX = x; iX < width + x; iX++) {
+		for (int iY = y; iY < height + y; iY++) {
+			gfx.PutPixel(iX, iY, 200, 200, 200);
+		}
+	}
+}
+
+
 int Box::getX()
 {
 	return x;

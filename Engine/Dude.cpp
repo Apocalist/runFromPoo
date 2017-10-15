@@ -4,7 +4,7 @@
 #include "Keyboard.h"
 
 
-void Dude::MoveDude(const Keyboard& kbd, class Timer time) {
+void Dude::MoveDude(const Keyboard& kbd,Timer& time) {
 
 	//Move dude
 	
@@ -109,6 +109,26 @@ void Dude::ClampToScreen()
 		y = 0;
 	}
 
+}
+
+float Dude::GetX() const
+{
+	return x;
+}
+
+float Dude::GetY() const
+{
+	return y;
+}
+
+int Dude::GetWidth() const
+{
+	return width;
+}
+
+int Dude::GetHeight() const
+{
+	return height;
 }
 
 void Dude::Draw(Graphics & gfx) const
@@ -435,22 +455,4 @@ void Dude::Draw(Graphics & gfx) const
 	gfx.PutPixel(12 + in_x, 19 + in_y, 0, 0, 0);
 }
 
-float Dude::GetX() const
-{
-	return x;
-}
 
-float Dude::GetY() const
-{
-	return y;
-}
-
-int Dude::GetWidth() const
-{
-	return width;
-}
-
-int Dude::GetHeight() const
-{
-	return height;
-}

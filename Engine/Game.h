@@ -44,9 +44,6 @@ private:
 	void DrawGameOver(int x, int y);
 	void DrawTitleScreen(int x, int y);
 
-	void DrawBox(int x0, int y0, int width, int height);
-	int CycleColor(int& c);
-
 	void IncPoo(const Dude& dude);
 
 	void Restart();

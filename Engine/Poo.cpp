@@ -4,7 +4,7 @@
 #include "Dude.h"
 
 
-void Poo::Update(class Timer time) {
+void Poo::Update(Timer& time) {
 
 	x += x_dir * time.DeltaTime();
 	y += y_dir * time.DeltaTime();
@@ -24,7 +24,7 @@ void Poo::Update(class Timer time) {
 	//****
 }
 
-void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir, class Timer time)
+void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir,Timer& time)
 {
 	
 	x = in_x;
@@ -35,6 +35,40 @@ void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir, cl
 	y_dir = in_y_dir;
 
 
+}
+
+void Poo::isColliding(const Dude& dude)
+{
+	if (
+		x + width >= dude.GetX() &&
+		x <= dude.GetX() + dude.GetWidth() &&
+		y + height >= dude.GetY() &&
+		y <= dude.GetY() + dude.GetHeight()
+		) 
+		{
+		isEaten = true;
+		}
+
+}
+
+bool Poo::IsEaten() const
+{
+	return isEaten;
+}
+
+float Poo::GetWidth() const
+{
+	return width;
+}
+
+float Poo::GetHeight() const
+{
+	return height;
+}
+
+void Poo::Reset()
+{
+	isEaten = false;
 }
 
 void Poo::Draw(Graphics& gfx)
@@ -276,37 +310,4 @@ void Poo::Draw(Graphics& gfx)
 
 }
 
-void Poo::isColliding(const Dude& dude)
-{
-	if (
-		x + width >= dude.GetX() &&
-		x <= dude.GetX() + dude.GetWidth() &&
-		y + height >= dude.GetY() &&
-		y <= dude.GetY() + dude.GetHeight()
-		) 
-		{
-		isEaten = true;
-		}
-
-}
-
-bool Poo::IsEaten() const
-{
-	return isEaten;
-}
-
-float Poo::GetWidth() const
-{
-	return width;
-}
-
-float Poo::GetHeight() const
-{
-	return height;
-}
-
-void Poo::Reset()
-{
-	isEaten = false;
-}
 

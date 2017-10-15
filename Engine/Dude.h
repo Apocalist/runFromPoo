@@ -14,7 +14,7 @@ public:
 
 	}
 
-	void MoveDude(const Keyboard& kbd, class Timer time);
+	void MoveDude(const Keyboard& kbd,Timer& time);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 	float GetX() const;
