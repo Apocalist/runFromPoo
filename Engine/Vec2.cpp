@@ -17,6 +17,16 @@ float Vec2::GetLengthSqr()
 	return x*x + y*y ;
 }
 
+Vec2 Vec2::GetNormalized()
+{
+	const float len = GetLength();
+	if (len != 0) {
+		return *this * (1.0f / GetLength());
+	}else{
+		return *this;
+	}
+}
+
 Vec2 Vec2::operator+(const Vec2 & v) const
 {
 

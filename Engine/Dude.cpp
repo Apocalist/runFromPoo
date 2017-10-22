@@ -52,30 +52,9 @@ void Dude::MoveDude(const Keyboard& kbd,Timer& time) {
 		}
 	}
 
-	//Equalize hipotenuse vector 
-
-	float x_temp;
-	float y_temp;
-
-	if (trans.y == 0) {
-		x_temp = trans.x;
-	}
-	else {
-		x_temp = trans.x / sqrt(((abs(trans.y*trans.y)) + 1));
-	}
-
-
-	if (trans.x == 0) {
-		y_temp = trans.y;
-	}
-	else {
-		y_temp = trans.y / sqrt(((abs(trans.x*trans.x)) + 1));
-
-	}
-	//Add speed to vectors and map values to x and y
-
-	pos.x += x_temp * speed * time.DeltaTime();
-	pos.y += y_temp * speed * time.DeltaTime();
+	//Add speed to vectors and normalize trans
+	
+	pos += trans.GetNormalized() * speed * time.DeltaTime();
 
 }
 

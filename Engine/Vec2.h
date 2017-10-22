@@ -9,6 +9,7 @@ public:
 
 	float GetLength();
 	float GetLengthSqr();
+	Vec2 GetNormalized();
 
 	Vec2 operator + (const Vec2& v) const;
 	Vec2& operator += (const Vec2& v);
