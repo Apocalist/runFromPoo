@@ -20,10 +20,8 @@ public:
 private:
 
 
-	float x;
-	float y;
-	float x_dir;
-	float y_dir;
+	Vec2 pos;
+	Vec2 dir;
 	bool isEaten = false;
 	static constexpr float width = 25;
 	static constexpr float height = 25;

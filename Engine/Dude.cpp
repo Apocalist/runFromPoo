@@ -7,62 +7,48 @@
 void Dude::MoveDude(const Keyboard& kbd,Timer& time) {
 
 	//Move dude
+	//And set limit to 1
 	
 
 	if (kbd.KeyIsPressed(VK_LEFT)) {
-
-		x_trans -= speedRate;
-
+		if (trans.x >= -1) {
+			trans.x -= speedRate;
+		}
 	}
 	if (kbd.KeyIsPressed(VK_RIGHT)) {
-
-		x_trans += speedRate;
+		if (trans.x <= 1) {
+			trans.x += speedRate;
+		}
 	}
 
 	if (kbd.KeyIsPressed(VK_UP)) {
-
-		y_trans -= speedRate;
-
+		if (trans.y >= -1) {
+			trans.y -= speedRate;
+		}
 	}
 	if (kbd.KeyIsPressed(VK_DOWN)) {
-
-		y_trans += speedRate;
-
+		if (trans.y <= 1) {
+			trans.y += speedRate;
+		}
 	}
-
-	// Set max X and Y values
-
-	if (x_trans >= 1) {
-		x_trans = 1;
-	}
-	else if (x_trans <= -1) {
-		x_trans = -1;
-	}
-	if (y_trans >= 1) {
-		y_trans = 1;
-	}
-	else if (y_trans <= -1) {
-		y_trans = -1;
-	}
-
 
 	// Decelerate when key is not pressed
 
 	if (!(kbd.KeyIsPressed(VK_LEFT)) && !(kbd.KeyIsPressed(VK_RIGHT))) {
-		if (x_trans < 0.005 && x_trans > -0.005) {
-			x_trans = 0;
+		if ( trans.x < 0.005 && trans.x > -0.005) {
+			trans.x = 0;
 		}
 		else {
-			x_trans = (abs(x_trans) - speedRate) * (abs(x_trans) / x_trans); // absolute value of X * de curent direction of X (positive or negative)
+			trans.x = (abs(trans.x) - speedRate) * (abs(trans.x) / trans.x); // absolute value of X * de curent direction of X (positive or negative)
 		}
 	}
 
 	if (!(kbd.KeyIsPressed(VK_UP)) && !(kbd.KeyIsPressed(VK_DOWN))) {
-		if (y_trans < 0.005 && y_trans > -0.005) {
-			y_trans = 0;
+		if (trans.y < 0.005 && trans.y > -0.005) {
+			trans.y = 0;
 		}
 		else {
-			y_trans = (abs(y_trans) - speedRate) * (abs(y_trans) / y_trans);  // absolute value of Y * de curent direction of Y (positive or negative)
+			trans.y = (abs(trans.y) - speedRate) * (abs(trans.y) / trans.y);  // absolute value of Y * de curent direction of Y (positive or negative)
 		}
 	}
 
@@ -71,55 +57,46 @@ void Dude::MoveDude(const Keyboard& kbd,Timer& time) {
 	float x_temp;
 	float y_temp;
 
-	if (y_trans == 0) {
-		x_temp = x_trans;
+	if (trans.y == 0) {
+		x_temp = trans.x;
 	}
 	else {
-		x_temp = x_trans / sqrt(((abs(y_trans*y_trans)) + 1));
+		x_temp = trans.x / sqrt(((abs(trans.y*trans.y)) + 1));
 	}
 
 
-	if (x_trans == 0) {
-		y_temp = y_trans;
+	if (trans.x == 0) {
+		y_temp = trans.y;
 	}
 	else {
-		y_temp = y_trans / sqrt(((abs(x_trans*x_trans)) + 1));
+		y_temp = trans.y / sqrt(((abs(trans.x*trans.x)) + 1));
 
 	}
 	//Add speed to vectors and map values to x and y
 
-	x += x_temp * speed * time.DeltaTime();
-	y += y_temp * speed * time.DeltaTime();
+	pos.x += x_temp * speed * time.DeltaTime();
+	pos.y += y_temp * speed * time.DeltaTime();
 
 }
 
 void Dude::ClampToScreen()
 {
-	if (x + width > Graphics::ScreenWidth) {
-		x = (Graphics::ScreenWidth) - width;
+	if (pos.x + width > Graphics::ScreenWidth) {
+		pos.x = (Graphics::ScreenWidth) - width;
 	}
-	else if (x < 0) {
-		x = 0;
+	else if (pos.x < 0) {
+		pos.x = 0;
 	}
 
-	if (y + height > Graphics::ScreenHeight) {
-		y = (Graphics::ScreenHeight) - height;
+	if (pos.y + height > Graphics::ScreenHeight) {
+		pos.y = (Graphics::ScreenHeight) - height;
 	}
-	else if (y < 0) {
-		y = 0;
+	else if (pos.y < 0) {
+		pos.y = 0;
 	}
 
 }
 
-float Dude::GetX() const
-{
-	return x;
-}
-
-float Dude::GetY() const
-{
-	return y;
-}
 
 int Dude::GetWidth() const
 {
@@ -134,8 +111,8 @@ int Dude::GetHeight() const
 void Dude::Draw(Graphics & gfx) const
 {
 
-	const int in_x = int(x);
-	const int in_y = int(y);
+	const int in_x = int(pos.x);
+	const int in_y = int(pos.y);
 
 	gfx.PutPixel(7 + in_x, 0 + in_y, 0, 0, 0);
 	gfx.PutPixel(8 + in_x, 0 + in_y, 0, 0, 0);
@@ -454,5 +431,11 @@ void Dude::Draw(Graphics & gfx) const
 	gfx.PutPixel(11 + in_x, 19 + in_y, 0, 0, 0);
 	gfx.PutPixel(12 + in_x, 19 + in_y, 0, 0, 0);
 }
+
+Vec2 Dude::GetPos() const
+{
+	return pos;
+}
+
 
 

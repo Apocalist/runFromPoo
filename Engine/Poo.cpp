@@ -6,19 +6,20 @@
 
 void Poo::Update(Timer& time) {
 
-	x += x_dir * time.DeltaTime();
-	y += y_dir * time.DeltaTime();
+	//x += x_dir * time.DeltaTime();
+	//y += y_dir * time.DeltaTime();
+	pos += dir * time.DeltaTime();
 
 	// Bounce off the screen limits
 
 	const int w = Graphics::ScreenWidth - int(width) - 1;
 	const int h = Graphics::ScreenHeight - int(height) - 1;
 
-	if ( x <= 0 ||x >= w) {
-		x_dir *= -1;
+	if ( pos.x <= 0 ||pos.x >= w) {
+		dir.x *= -1;
 	}
-	if (y <= 0 || y >= h) {
-		y_dir *= -1;
+	if (pos.y <= 0 || pos.y >= h) {
+		dir.y *= -1;
 	}
 
 	//****
@@ -27,12 +28,12 @@ void Poo::Update(Timer& time) {
 void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir,Timer& time)
 {
 	
-	x = in_x;
-	y = in_y;
+	pos.x = in_x;
+	pos.y = in_y;
 
 
-	x_dir = in_x_dir;
-	y_dir = in_y_dir;
+	dir.x = in_x_dir;
+	dir.y = in_y_dir;
 
 
 }
@@ -40,10 +41,10 @@ void Poo::RandPos( float( in_x), float(in_y), float in_x_dir, float in_y_dir,Tim
 void Poo::isColliding(const Dude& dude)
 {
 	if (
-		x + width >= dude.GetX() &&
-		x <= dude.GetX() + dude.GetWidth() &&
-		y + height >= dude.GetY() &&
-		y <= dude.GetY() + dude.GetHeight()
+		pos.x + width >= dude.GetPos().x &&
+		pos.x <= dude.GetPos().x + dude.GetWidth() &&
+		pos.y + height >= dude.GetPos().y &&
+		pos.y <= dude.GetPos().y + dude.GetHeight()
 		) 
 		{
 		isEaten = true;
@@ -73,8 +74,8 @@ void Poo::Reset()
 
 void Poo::Draw(Graphics& gfx)
 {
-	const int in_x = int(x);
-	const int in_y = int(y);
+	const int in_x = int(pos.x);
+	const int in_y = int(pos.y);
 		
 	gfx.PutPixel(14 + in_x, 0 + in_y, 138, 77, 0);
 	gfx.PutPixel(7 + in_x, 1 + in_y, 138, 77, 0);

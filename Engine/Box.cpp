@@ -3,10 +3,10 @@
 
 bool Box::BoxCollide(const Dude& dude)
 {
-	return  x + width >= dude.GetX() &&
-			x <= dude.GetX() + dude.GetWidth() &&
-			y + height >= dude.GetY() &&
-			y <= dude.GetY() + dude.GetHeight();
+	return  x + width >= dude.GetPos().x &&
+			x <= dude.GetPos().x + dude.GetWidth() &&
+			y + height >= dude.GetPos().y &&
+			y <= dude.GetPos().y + dude.GetHeight();
 }
 
 

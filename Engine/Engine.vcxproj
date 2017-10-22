@@ -211,6 +211,7 @@
     <ClInclude Include="Poo.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Poo.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">

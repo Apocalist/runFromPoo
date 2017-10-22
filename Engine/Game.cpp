@@ -152,10 +152,10 @@ void Game::IncPoo( const Dude& dude)
 			float xTemp = float(xDist(rng));
 			float yTemp = float(yDist(rng));
 
-			if (!(xTemp + poos[i].GetWidth() >= dude.GetX() &&
-				xTemp <= dude.GetX() + dude.GetWidth() &&
-				yTemp + poos[i].GetHeight() >= dude.GetY() &&
-				yTemp <= dude.GetY() + dude.GetHeight())) {
+			if (!(xTemp + poos[i].GetWidth() >= dude.GetPos().x &&
+				xTemp <= dude.GetPos().x + dude.GetWidth() &&
+				yTemp + poos[i].GetHeight() >= dude.GetPos().y &&
+				yTemp <= dude.GetPos().y + dude.GetHeight())) {
 
 				poos[i].RandPos(xTemp, yTemp, xDir(rng), yDir(rng), time);
 
